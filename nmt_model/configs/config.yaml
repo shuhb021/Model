@@ -1,0 +1,101 @@
+# NMT Model Configuration
+# Asymmetric Multilingual NMT | Gondi ↔ Hindi ↔ English
+# ~137M Parameters
+
+model:
+  vocab_size: 32000
+  d_model: 512
+  d_ff: 2048
+  num_heads: 8
+  enc_layers: 8
+  dec_layers: 4
+  dropout: 0.15
+  max_seq_len: 256
+  pad_id: 0
+
+  # Relative Position Bias (T5-style)
+  pos_bias:
+    num_buckets: 32
+    max_distance: 256
+
+lora:
+  enabled: true
+  rank: 16
+  alpha: 32.0
+  dropout: 0.05
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - out_proj
+
+training:
+  optimizer: adamw
+  beta1: 0.9
+  beta2: 0.98
+  epsilon: 1.0e-8
+  weight_decay: 0.01
+
+  scheduler: cosine_warmup
+  warmup_steps: 4000
+  min_lr: 1.0e-6
+
+  precision: fp16           # or bf16 on Ampere+ GPUs
+  batch_size: 32
+  grad_accum_steps: 4       # effective batch = 128
+  max_grad_norm: 1.0
+
+  label_smoothing: 0.1
+
+  curriculum:
+    stage1_warmup_epochs: 5
+    stage2_multilingual_epochs: 10
+    stage3_gondi_epochs: 5
+
+  temperature_sampling:
+    T: 1.6
+    datasets:
+      gondi_hindi:   150000
+      gondi_english: 150000
+      hindi_english: 300000
+
+data:
+  bpe_dropout: 0.1           # subword regularization during training
+  max_src_len: 256
+  max_tgt_len: 256
+
+  languages:
+    gondi:
+      tag: "__gon_Latn__"
+      script: latin
+    hindi:
+      tag: "__hin_Deva__"
+      script: devanagari
+    english:
+      tag: "__eng_Latn__"
+      script: latin
+
+  tokenizer_model: "configs/multilingual_bpe.model"
+
+inference:
+  method: mbr               # mbr | beam | greedy
+
+  mbr:
+    k: 16                   # candidate pool size
+    temperature: 0.65       # ancestral sampling temperature
+
+  beam:
+    beam_size: 4
+    length_penalty: 0.6
+
+  translation_memory:
+    enabled: true
+    fusion_threshold: 0.85
+    backend: tfidf           # tfidf (default) | faiss (production)
+    faiss_model: "sentence-transformers/LaBSE"
+
+paths:
+  tokenizer_model: "configs/multilingual_bpe.model"
+  checkpoint_dir: "checkpoints/"
+  data_dir: "data/processed/"
+  log_dir: "logs/"

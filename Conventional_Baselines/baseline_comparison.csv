@@ -1,0 +1,5 @@
+Baseline Model,Paradigm,Encoder Config,Decoder Config,Parameters (M),Total Parameters,BLEU-1,BLEU-4,chrF++,Latency (ms)
+BiLSTM + Attention,Recurrent (LSTM),"2-layer Bidirectional LSTM (H=512, E=256)",2-layer LSTM + Bahdanau Additive Attention,23.97M,23965064,-,-,-,-
+GRU + Attention,Recurrent (GRU),"2-layer Bidirectional GRU (H=512, E=256)",2-layer GRU + Bahdanau Additive Attention,19.90M,19895176,-,-,-,-
+Transformer-Small,Standard Transformer,"4-layer Transformer Encoder (d=256, h=4, d_ff=1024)","4-layer Transformer Decoder (d=256, h=4, d_ff=1024)",11.22M,11218824,-,-,-,-
+Transformer-Base,Standard Transformer,"6-layer Transformer Encoder (d=512, h=8, d_ff=2048)","6-layer Transformer Decoder (d=512, h=8, d_ff=2048)",51.83M,51825544,-,-,-,-

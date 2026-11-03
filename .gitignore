@@ -1,0 +1,35 @@
+# Virtual environments
+venv/
+.venv/
+env/
+__pycache__/
+*.pyc
+
+# Model Weights and Checkpoints
+*.pt
+*.pth
+*.bin
+*.onnx
+*.safetensors
+checkpoint-*/
+checkpoints/
+Model_Weights/
+byt5-gondi-final/
+byt5-gondi-translation/
+EREBUS/
+gondi_model/
+
+# Training Data (explicitly excluded: no training data)
+*train*.csv
+*training*.csv
+*500k*.csv
+gondi_dataset_full.csv
+training.csv
+
+# Logs & Temporary outputs
+*.log
+Evaluation_Results/
+t5_gondi_results/
+results Byt5/
+history_*.json
+eval_*.json

@@ -1,0 +1,57 @@
+================================================================================
+                    GONDI TRANSLATION MODELS: PARAMETER COUNTS
+================================================================================
+
+This file contains the parameter counts for all translation models in this project,
+calculated using:
+    sum(p.numel() for p in model.parameters())
+
+--------------------------------------------------------------------------------
+1. T5 MODEL (T5ForConditionalGeneration)
+--------------------------------------------------------------------------------
+- Folder: T5 MODEL/T5_Model
+- Source File: t5_train.py
+- Vocabulary Size: 5,000
+- Total Parameters: 10,788,096 (~10.79 Million)
+- Status: Saved/trained under 'T5 MODEL/t5_gondi_model'
+
+--------------------------------------------------------------------------------
+2. LSTM MODEL (Seq2SeqWithAttention)
+--------------------------------------------------------------------------------
+- Folder: LSTM_Model
+- Source File: gondi_seq2seq.py / train.py
+- Vocabulary Size: 5,000
+- Total Parameters: 23,965,064 (~23.97 Million)
+- Status: Saved/trained under 'LSTM_Model/best_gondi_model_eng.pt'
+
+--------------------------------------------------------------------------------
+3. ByT5 MODEL (T5ForConditionalGeneration - ByT5 architecture with BPE vocab)
+--------------------------------------------------------------------------------
+- Folder: Byt5 Model
+- Source File: Scripts/byt5_train.py
+- Vocabulary Size: 5,000 (from loaded BPE tokenizer)
+- Total Parameters: 25,524,864 (~25.52 Million)
+- Status: Scripts/byt5_train.py configuration
+
+--------------------------------------------------------------------------------
+4. NLLB MODEL (Custom Transformer - CustomNllbModel)
+--------------------------------------------------------------------------------
+- Folder: NLLB
+- Source File: model.py / train.py
+- Vocabulary Size: 32,000 (max(32000, tokenizer_vocab_size))
+- Parameters:
+    * Without LoRA: 70,941,184 (~70.94 Million)
+    * With LoRA (Total): 71,989,760 (~71.99 Million)
+    * With LoRA (Trainable): 55,212,544 (~55.21 Million)
+- Status: Source code model definition
+
+--------------------------------------------------------------------------------
+5. Marian MT MODEL (MarianMTModel)
+--------------------------------------------------------------------------------
+- Folder: gondi_model
+- Configuration File: gondi_model/final/config.json
+- Vocabulary Size: 61,950
+- Total Parameters: 76,381,184 (~76.38 Million)
+- Status: Saved/trained checkpoints in 'gondi_model'
+
+================================================================================

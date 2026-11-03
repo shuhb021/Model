@@ -1,0 +1,31 @@
+# Core dependencies
+torch>=2.0.0
+torchvision>=0.15.0
+
+# Tokenization
+sentencepiece>=0.1.99
+
+# Data processing
+numpy>=1.24.0
+
+# Optional: Production-grade dense retrieval (FAISS + sentence-transformers)
+# Uncomment for 600K-scale TM index:
+# faiss-cpu>=1.7.4
+# sentence-transformers>=2.2.2
+
+# Optional: FastText language identification
+# fasttext-langdetect>=1.0.5
+
+# Optional: Approximate deduplication at scale
+# datasketch>=1.5.9
+
+# Development / evaluation
+sacrebleu>=2.3.1       # BLEU + chrF evaluation
+tqdm>=4.65.0
+
+# Experiment tracking (optional)
+# wandb>=0.15.0
+# tensorboard>=2.13.0
+
+# Config loading
+pyyaml>=6.0
